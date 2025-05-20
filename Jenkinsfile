@@ -14,7 +14,11 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/RandomSoftware/BabySteps.git'
             }
         }
-
+        stage('Publish Test Reports') {
+            steps {
+                junit 'target/surefire-reports/*.xml'
+            }
+        }
         stage('Build & Test') {
             steps {
                 sh 'mvn clean package'
